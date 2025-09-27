@@ -1,0 +1,66 @@
+[
+  {
+    "model": "naves.armador",
+    "pk": 1,
+    "fields": {
+      "nombre": "Mar Azul Ltda",
+      "rut": "76.123.456-7",
+      "email": "contacto@marazul.cl"
+    }
+  },
+  {
+    "model": "naves.armador",
+    "pk": 2,
+    "fields": {
+      "nombre": "Nautilus SpA",
+      "rut": "77.987.654-3",
+      "email": "info@nautilus.cl"
+    }
+  },
+  {
+    "model": "naves.nave",
+    "pk": 1,
+    "fields": {
+      "matricula": "LM-001",
+      "nombre": "Luna",
+      "tipo": "LM",
+      "eslora_m": "7.50",
+      "anio": 2012,
+      "armador": 1,
+      "activa": true
+    }
+  },
+  {
+    "model": "naves.nave",
+    "pk": 2,
+    "fields": {
+      "matricula": "YT-101",
+      "nombre": "Coral",
+      "tipo": "YT",
+      "eslora_m": "12.00",
+      "anio": 2018,
+      "armador": 2,
+      "activa": true
+    }
+  },
+  {
+    "model": "naves.certificado",
+    "pk": 1,
+    "fields": {
+      "nave": 1,
+      "tipo": "Seguridad",
+      "fecha_emision": "2025-01-10",
+      "fecha_vencimiento": "2026-01-10"
+    }
+  },
+  {
+    "model": "naves.certificado",
+    "pk": 2,
+    "fields": {
+      "nave": 2,
+      "tipo": "Homologación",
+      "fecha_emision": "2024-07-01",
+      "fecha_vencimiento": "2025-07-01"
+    }
+  }
+]

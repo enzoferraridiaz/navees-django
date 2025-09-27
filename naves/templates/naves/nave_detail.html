@@ -1,0 +1,23 @@
+<h1>{{ object.nombre }} [{{ object.matricula }}]</h1>
+<p>Armador: {{ object.armador.nombre }}</p>
+<p>Tipo: {{ object.get_tipo_display }} · Año: {{ object.anio }} · Activa: {{ object.activa }}</p>
+<h2>Certificados</h2>
+<p><a href="{% url 'naves:cert_create' object.pk %}">➕ Nuevo certificado</a></p>
+<table>
+<tr><th>Tipo</th><th>Emisión</th><th>Vencimiento</th><th>Vigente</th><th>Acciones</th></tr>
+{% for c in object.certificados.all %}
+<tr>
+<td>{{ c.tipo }}</td>
+<td>{{ c.fecha_emision }}</td>
+<td>{{ c.fecha_vencimiento }}</td>
+<td>{% if c.vigente %}Sí{% else %}No{% endif %}</td>
+<td>
+<a href="{% url 'naves:cert_update' c.pk %}">Editar</a> ·
+<a href="{% url 'naves:cert_delete' c.pk %}">Eliminar</a>
+</td>
+</tr>
+{% empty %}
+<tr><td colspan="5">Sin certificados</td></tr>
+{% endfor %}
+</table>
+<p><a href="{% url 'naves:nave_list' %}">Volver</a></p>

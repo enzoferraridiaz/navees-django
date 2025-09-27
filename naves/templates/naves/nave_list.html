@@ -1,0 +1,90 @@
+<h1>Naves</h1>
+
+<form method="get">
+    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Buscar matrícula/nombre/armador">
+
+    <select name="tipo">
+        <option value="">Todos los tipos</option>
+        <option value="LM" {% if request.GET.tipo == "LM" %}selected{% endif %}>Lancha menor</option>
+        <option value="PM" {% if request.GET.tipo == "PM" %}selected{% endif %}>Pesquera menor</option>
+        <option value="YT" {% if request.GET.tipo == "YT" %}selected{% endif %}>Yate</option>
+        <option value="OT" {% if request.GET.tipo == "OT" %}selected{% endif %}>Otro</option>
+    </select>
+
+    <select name="activa">
+        <option value="">Todas</option>
+        <option value="true" {% if request.GET.activa == "true" %}selected{% endif %}>Activas</option>
+        <option value="false" {% if request.GET.activa == "false" %}selected{% endif %}>Inactivas</option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<p><a href="{% url 'naves:nave_create' %}">Nueva nave</a></p>
+
+<ul>
+    {% for nave in object_list %}
+        <li>
+            <a href="{% url 'naves:nave_detail' nave.pk %}">{{ nave.nombre }}</a>
+            [{{ nave.matricula }}] — {{ nave.armador.nombre }}
+            {% if nave.cert_vigentes > 0 %}
+                <strong>· Certificado vigente</strong>
+            {% endif %}
+            · <a href="{% url 'naves:nave_update' nave.pk %}">Editar</a>
+            · <a href="{% url 'naves:nave_delete' nave.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay naves.</li>
+    {% endfor %}
+</ul>
+<h1>Naves</h1>
+
+<form method="get">
+    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Buscar matrícula/nombre/armador">
+
+    <select name="tipo">
+        <option value="">Todos los tipos</option>
+        <option value="LM" {% if request.GET.tipo == "LM" %}selected{% endif %}>Lancha menor</option>
+        <option value="PM" {% if request.GET.tipo == "PM" %}selected{% endif %}>Pesquera menor</option>
+        <option value="YT" {% if request.GET.tipo == "YT" %}selected{% endif %}>Yate</option>
+        <option value="OT" {% if request.GET.tipo == "OT" %}selected{% endif %}>Otro</option>
+    </select>
+
+    <select name="activa">
+        <option value="">Todas</option>
+        <option value="true" {% if request.GET.activa == "true" %}selected{% endif %}>Activas</option>
+        <option value="false" {% if request.GET.activa == "false" %}selected{% endif %}>Inactivas</option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<p><a href="{% url 'naves:nave_create' %}">Nueva nave</a></p>
+
+<ul>
+    {% for nave in object_list %}
+        <li>
+            <a href="{% url 'naves:nave_detail' nave.pk %}">{{ nave.nombre }}</a>
+            [{{ nave.matricula }}] — {{ nave.armador.nombre }}
+            {% if nave.cert_vigentes > 0 %}
+                <strong>· Certificado vigente</strong>
+            {% endif %}
+            · <a href="{% url 'naves:nave_update' nave.pk %}">Editar</a>
+            · <a href="{% url 'naves:nave_delete' nave.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay naves.</li>
+    {% endfor %}
+</ul>
+
+{% if is_paginated %}
+<nav>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+    Página {{ page_obj.number }} de {{ paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+    {% endif %}
+</nav>
+{% endif %}
